@@ -1,0 +1,15 @@
+{
+  "originHash" : "68675064b259a12fef4fb6c111420d1db6486bafa55e0f1fc9950ac66de1f865",
+  "pins" : [
+    {
+      "identity" : "harbor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/javiermanzo/Harbor",
+      "state" : {
+        "revision" : "2b065b3c8b74553531cb60b6df5c8d821698935d",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}
