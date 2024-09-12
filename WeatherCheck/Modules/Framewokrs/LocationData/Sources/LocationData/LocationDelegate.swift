@@ -9,17 +9,26 @@ import Foundation
 import CoreLocation
 
 class LocationDelegate: NSObject, CLLocationManagerDelegate {
-    private let onUpdate: ([CLLocation], Error?) -> Void
+    private var onUpdateLocation: (([CLLocation], Error?) -> Void)?
+    private var onUpdateStatus: ((CLAuthorizationStatus) -> Void)?
 
-    init(onUpdate: @escaping ([CLLocation], Error?) -> Void) {
-        self.onUpdate = onUpdate
+    init(onUpdateLocation: @escaping ([CLLocation], Error?) -> Void) {
+        self.onUpdateLocation = onUpdateLocation
+    }
+
+    init(onUpdateStatus: @escaping ((CLAuthorizationStatus) -> Void)) {
+        self.onUpdateStatus = onUpdateStatus
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        onUpdate(locations, nil)
+        onUpdateLocation?(locations, nil)
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        onUpdate([], error)
+        onUpdateLocation?([], error)
+    }
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        onUpdateStatus?(status)
     }
 }

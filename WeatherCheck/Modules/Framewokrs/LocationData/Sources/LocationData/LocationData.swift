@@ -46,21 +46,28 @@ public final class LocationData {
     }
 
     public func checkLocationAuthorizationStatus(requestIfPending: Bool = true) async -> CLAuthorizationStatus {
-        let manager = CLLocationManager()
-        var status = manager.authorizationStatus
+        let status = locationManager.authorizationStatus
 
         if requestIfPending, status == .notDetermined {
             return await withCheckedContinuation { continuation in
-                manager.requestWhenInUseAuthorization()
-                status = manager.authorizationStatus
-                continuation.resume(returning: status)
+                locationDelegate = LocationDelegate { status in
+                    Task {
+                        await MainActor.run {
+                            continuation.resume(returning: status)
+                            self.locationDelegate = nil
+                        }
+                    }
+                }
+
+                locationManager.delegate = locationDelegate
+                locationManager.requestWhenInUseAuthorization()
             }
         }
 
         return status
     }
 
-    
+
     public func requestCurrentLocation() async throws -> LocationModel {
         guard CLLocationManager.locationServicesEnabled() else {
             throw LocationError.servicesDisabled

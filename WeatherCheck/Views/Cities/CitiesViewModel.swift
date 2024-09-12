@@ -51,3 +51,11 @@ final class CitiesViewModel {
         }
     }
 }
+
+// MARK: - CitiesViewModelDelegate
+extension CitiesViewModel: AddCityDelegate {
+    func didAddCity(_ city: CityModel) {
+        cities.insert(city)
+        delegate?.reloadTableView()
+    }
+}

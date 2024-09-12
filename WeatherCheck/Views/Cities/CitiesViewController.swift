@@ -56,8 +56,8 @@ class CitiesViewController: UIViewController {
     }
 
     @objc func addCity() {
-        // Handle adding city
-        print("Add city tapped")
+        let addCityVC = AddCityViewController(delegate: viewModel)
+        self.present(UINavigationController(rootViewController: addCityVC), animated: true)
     }
 
     func loadCitiesData() {
@@ -67,7 +67,6 @@ class CitiesViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 extension CitiesViewController: UITableViewDataSource {
-
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
