@@ -60,6 +60,7 @@ public final class LocationData {
         return status
     }
 
+    
     public func requestCurrentLocation() async throws -> LocationModel {
         guard CLLocationManager.locationServicesEnabled() else {
             throw LocationError.servicesDisabled
@@ -81,11 +82,11 @@ public final class LocationData {
                 } else {
                     continuation.resume(throwing: LocationError.noLocationAvailable)
                 }
+                self.locationDelegate = nil
             }
 
             locationManager.delegate = locationDelegate
             locationManager.requestLocation()
         }
     }
-
 }
