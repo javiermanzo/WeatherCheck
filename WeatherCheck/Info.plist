@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need access to your location to show you relevant information.</string>
+
+    <key>NSCalendarsUsageDescription</key>
+    <string>This app needs access to your calendar to add events.</string>
+
+	<key>NSUserNotificationUsageDescription</key>
+	<string>We need to send notifications to alert you about important weather changes.</string>
+
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -19,17 +34,14 @@
 			</array>
 		</dict>
 	</dict>
-
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-    </dict>
-
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>We need access to your location to show you relevant information.</string>
     
-    <key>NSCalendarsUsageDescription</key>
-    <string>This app needs access to your calendar to add events.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <string>com.javiermanzo.WeatherCheckFetch</string>
+    </array>
 </dict>
 </plist>

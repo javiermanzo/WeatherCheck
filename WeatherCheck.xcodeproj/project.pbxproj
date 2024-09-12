@@ -11,6 +11,7 @@
 		3B49ED3B2C91D75F00EB4698 /* WeatherData in Frameworks */ = {isa = PBXBuildFile; productRef = 3B49ED3A2C91D75F00EB4698 /* WeatherData */; };
 		3B49ED452C9303CC00EB4698 /* LocationData in Frameworks */ = {isa = PBXBuildFile; productRef = 3B49ED442C9303CC00EB4698 /* LocationData */; };
 		3B49ED472C9303CD00EB4698 /* Reminder in Frameworks */ = {isa = PBXBuildFile; productRef = 3B49ED462C9303CD00EB4698 /* Reminder */; };
+		3B49ED4A2C930F3D00EB4698 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED492C930F3D00EB4698 /* NotificationsManager.swift */; };
 		3B7BE1672C91C2B500718845 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE1662C91C2B500718845 /* AppDelegate.swift */; };
 		3B7BE1692C91C2B500718845 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE1682C91C2B500718845 /* SceneDelegate.swift */; };
 		3B7BE16B2C91C2B500718845 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE16A2C91C2B500718845 /* ViewController.swift */; };
@@ -43,6 +44,8 @@
 		3B49ED372C91D73E00EB4698 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		3B49ED3D2C91E03300EB4698 /* LocationData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LocationData; sourceTree = "<group>"; };
 		3B49ED432C92582800EB4698 /* Reminder */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Reminder; sourceTree = "<group>"; };
+		3B49ED492C930F3D00EB4698 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
+		3B49ED4B2C936D2E00EB4698 /* WeatherCheck.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherCheck.entitlements; sourceTree = "<group>"; };
 		3B7BE1632C91C2B500718845 /* WeatherCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B7BE1662C91C2B500718845 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B7BE1682C91C2B500718845 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +113,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3B49ED482C930F3000EB4698 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3B49ED492C930F3D00EB4698 /* NotificationsManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		3B7BE15A2C91C2B500718845 = {
 			isa = PBXGroup;
 			children = (
@@ -134,7 +145,9 @@
 		3B7BE1652C91C2B500718845 /* WeatherCheck */ = {
 			isa = PBXGroup;
 			children = (
+				3B49ED4B2C936D2E00EB4698 /* WeatherCheck.entitlements */,
 				3B49ED342C91D6EC00EB4698 /* Modules */,
+				3B49ED482C930F3000EB4698 /* Utils */,
 				3B7BE1662C91C2B500718845 /* AppDelegate.swift */,
 				3B7BE1682C91C2B500718845 /* SceneDelegate.swift */,
 				3B7BE16A2C91C2B500718845 /* ViewController.swift */,
@@ -301,6 +314,7 @@
 				3B7BE16B2C91C2B500718845 /* ViewController.swift in Sources */,
 				3B49ED382C91D73E00EB4698 /* Environment.swift in Sources */,
 				3B7BE1672C91C2B500718845 /* AppDelegate.swift in Sources */,
+				3B49ED4A2C930F3D00EB4698 /* NotificationsManager.swift in Sources */,
 				3B7BE1692C91C2B500718845 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,10 +487,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WeatherCheck/WeatherCheck.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherCheck/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app needs access to your calendar to add events.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need access to your location to show you relevant information.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -500,10 +518,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WeatherCheck/WeatherCheck.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherCheck/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app needs access to your calendar to add events.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need access to your location to show you relevant information.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

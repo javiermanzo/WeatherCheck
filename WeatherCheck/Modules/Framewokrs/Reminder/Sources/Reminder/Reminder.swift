@@ -7,6 +7,7 @@
 
 import Foundation
 import EventKit
+import UserNotifications
 
 public final class Reminder {
 
@@ -55,5 +56,41 @@ public final class Reminder {
         event.calendar = eventStore.defaultCalendarForNewEvents
 
         try eventStore.save(event, span: .futureEvents)
+    }
+
+    public static func checkNotificationsAuthorizationStatus(requestIfPending: Bool = true) async -> Result<UNAuthorizationStatus, Error> {
+        let currentSettings = await UNUserNotificationCenter.current().notificationSettings()
+        
+        if requestIfPending,
+            currentSettings.authorizationStatus == .notDetermined {
+            return await withCheckedContinuation { continuation in
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                    if let error = error {
+                        continuation.resume(returning: .failure(error))
+                    } else {
+                        let status: UNAuthorizationStatus = granted ? .authorized : .denied
+                        continuation.resume(returning: .success(status))
+                    }
+                }
+            }
+        }
+
+        return .success(currentSettings.authorizationStatus)
+    }
+
+    public static func scheduleLocalNotification(title: String, body: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling the notification: \(error)")
+            }
+        }
     }
 }
