@@ -16,7 +16,7 @@ final class WeatherViewModel {
     private let repository: WeatherRepositoryProtocol
     var city: CityModel
 
-    init(city: CityModel, repository: WeatherRepositoryProtocol = MockRepository()) {
+    init(city: CityModel, repository: WeatherRepositoryProtocol = WeatherRepository()) {
         self.city = city
         self.repository = repository
 

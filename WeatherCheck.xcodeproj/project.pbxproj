@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B31E7DA2C948DB8007D01FA /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 3B31E7D92C948DB8007D01FA /* Storage */; };
+		3B31E7DC2C948DE2007D01FA /* WeatherDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B31E7DB2C948DE2007D01FA /* WeatherDataSource.swift */; };
 		3B49ED382C91D73E00EB4698 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED372C91D73E00EB4698 /* Environment.swift */; };
 		3B49ED3B2C91D75F00EB4698 /* WeatherData in Frameworks */ = {isa = PBXBuildFile; productRef = 3B49ED3A2C91D75F00EB4698 /* WeatherData */; };
 		3B49ED452C9303CC00EB4698 /* LocationData in Frameworks */ = {isa = PBXBuildFile; productRef = 3B49ED442C9303CC00EB4698 /* LocationData */; };
@@ -55,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B31E7D82C948DA2007D01FA /* Storage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Storage; sourceTree = "<group>"; };
+		3B31E7DB2C948DE2007D01FA /* WeatherDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataSource.swift; sourceTree = "<group>"; };
 		3B49ED362C91D70B00EB4698 /* WeatherData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = WeatherData; sourceTree = "<group>"; };
 		3B49ED372C91D73E00EB4698 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		3B49ED3D2C91E03300EB4698 /* LocationData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LocationData; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 				3B49ED3B2C91D75F00EB4698 /* WeatherData in Frameworks */,
 				3B49ED452C9303CC00EB4698 /* LocationData in Frameworks */,
 				3B49ED692C93BE6C00EB4698 /* RemoteImage in Frameworks */,
+				3B31E7DA2C948DB8007D01FA /* Storage in Frameworks */,
 				3B49ED472C9303CD00EB4698 /* Reminder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +135,7 @@
 		3B49ED352C91D6F100EB4698 /* Framewokrs */ = {
 			isa = PBXGroup;
 			children = (
+				3B31E7D82C948DA2007D01FA /* Storage */,
 				3B49ED672C93BDF900EB4698 /* RemoteImage */,
 				3B49ED432C92582800EB4698 /* Reminder */,
 				3B49ED3D2C91E03300EB4698 /* LocationData */,
@@ -188,6 +194,7 @@
 				3B49ED6F2C94754500EB4698 /* WeatherRepositoryProtocol.swift */,
 				3B49ED542C937A7300EB4698 /* WeatherRepository.swift */,
 				3B49ED6D2C94746F00EB4698 /* MockRepository.swift */,
+				3B31E7DB2C948DE2007D01FA /* WeatherDataSource.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -315,6 +322,7 @@
 				3B49ED442C9303CC00EB4698 /* LocationData */,
 				3B49ED462C9303CD00EB4698 /* Reminder */,
 				3B49ED682C93BE6C00EB4698 /* RemoteImage */,
+				3B31E7D92C948DB8007D01FA /* Storage */,
 			);
 			productName = WeatherCheck;
 			productReference = 3B7BE1632C91C2B500718845 /* WeatherCheck.app */;
@@ -448,6 +456,7 @@
 				3B49ED612C9390CF00EB4698 /* AddCityViewController.swift in Sources */,
 				3B7BE1672C91C2B500718845 /* AppDelegate.swift in Sources */,
 				3B49ED4A2C930F3D00EB4698 /* NotificationsManager.swift in Sources */,
+				3B31E7DC2C948DE2007D01FA /* WeatherDataSource.swift in Sources */,
 				3B7BE1692C91C2B500718845 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -791,6 +800,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3B31E7D92C948DB8007D01FA /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Storage;
+		};
 		3B49ED3A2C91D75F00EB4698 /* WeatherData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WeatherData;

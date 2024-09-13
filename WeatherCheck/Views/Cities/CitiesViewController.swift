@@ -25,7 +25,7 @@ class CitiesViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        viewModel.fetchData()
         updateCitiesWeather()
     }
 
@@ -80,7 +80,7 @@ class CitiesViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension CitiesViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.currentCity != nil ? 2 : 1
+        return 2
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

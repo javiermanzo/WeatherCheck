@@ -8,11 +8,9 @@
 import Foundation
 import Harbor
 
-struct WeatherGetRequest: HGetRequestProtocol, HDebugRequestProtocol {
-    var debugType: HDebugRequestType = .requestAndResponse
-
+struct WeatherGetRequest: HGetRequestProtocol {
     typealias Model = WeatherResponseModel
-    let url: String = "\(WeatherData.baseUrl)/data/2.5/onecall"
+    let url: String = "\(WeatherData.baseUrl)/data/3.0/onecall"
     var headerParameters: [String: String]?
     var queryParameters: [String: String]?
     let pathParameters: [String: String]? = nil

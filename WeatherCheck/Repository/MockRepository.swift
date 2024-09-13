@@ -114,5 +114,19 @@ struct MockRepository: WeatherRepositoryProtocol {
         ]
     }
 
+    func saveCities(_ cities: [CityModel]) {
 
+    }
+
+    func saveOrUpdateCity(_ city: CityModel) {
+
+    }
+
+    func deleteSavedCity(_ city: CityModel) {
+
+    }
+
+    func clearSavedCities() {
+
+    }
 }

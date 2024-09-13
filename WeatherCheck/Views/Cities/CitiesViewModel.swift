@@ -17,15 +17,17 @@ final class CitiesViewModel {
     weak var delegate: CitiesViewModelDelegate?
     private let repository: WeatherRepositoryProtocol
     var currentCity: CityModel?
-    private var cities: Set<CityModel> = []
+    private var cities: [CityModel] = []
 
     var sortedCities: [CityModel] {
         Array(cities).sorted(by: { $0.createdAt < $1.createdAt })
     }
 
-    init(repository: WeatherRepositoryProtocol = MockRepository()) {
+    init(repository: WeatherRepositoryProtocol = WeatherRepository()) {
         self.repository = repository
+    }
 
+    func fetchData() {
         getCurrentCity()
         fetchSavedCities()
     }
@@ -39,7 +41,7 @@ final class CitiesViewModel {
     }
 
     private func fetchSavedCities() {
-        cities = Set(repository.fetchSavedCities())
+        cities = repository.fetchSavedCities()
 
         delegate?.reloadTableView()
 
@@ -94,8 +96,8 @@ final class CitiesViewModel {
             if let weather = await requestWeather(city: city) {
                 let updatedCity = updateCity(city, weather: weather)
                 await MainActor.run {
-                    cities.remove(city)
-                    cities.insert(updatedCity)
+                    replaceOrAddCity(updatedCity)
+                    repository.saveOrUpdateCity(updatedCity)
                     delegate?.reloadTableView()
                 }
             }
@@ -120,14 +122,23 @@ final class CitiesViewModel {
         let updatedCity = CityModel(id: city.id, name: city.name, latitude: city.latitude, longitude: city.longitude, createdAt: city.createdAt, weather: weather)
         return updatedCity
     }
+
+    private func replaceOrAddCity(_ city: CityModel) {
+        if let index = cities.firstIndex(where: { $0.id == city.id }) {
+            cities[index] = city
+        } else {
+            cities.append(city)
+        }
+    }
 }
 
 // MARK: - CitiesViewModelDelegate
 extension CitiesViewModel: AddCityDelegate {
     func didAddCity(_ city: CityModel) {
-        cities.insert(city)
+        replaceOrAddCity(city)
         delegate?.reloadTableView()
 
+        repository.saveOrUpdateCity(city)
         requestWeatherAndUpdateCity(city)
     }
 }
