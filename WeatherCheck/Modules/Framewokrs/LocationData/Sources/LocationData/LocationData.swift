@@ -50,12 +50,10 @@ public final class LocationData {
 
         if requestIfPending, status == .notDetermined {
             return await withCheckedContinuation { continuation in
-                locationDelegate = LocationDelegate { status in
-                    Task {
-                        await MainActor.run {
-                            continuation.resume(returning: status)
-                            self.locationDelegate = nil
-                        }
+                locationDelegate = LocationDelegate { newStatus in
+                    Task { @MainActor in
+                        continuation.resume(returning: newStatus)
+                        self.locationDelegate = nil
                     }
                 }
 
@@ -63,10 +61,8 @@ public final class LocationData {
                 locationManager.requestWhenInUseAuthorization()
             }
         }
-
         return status
     }
-
 
     public func requestCurrentLocation() async throws -> LocationModel {
         guard CLLocationManager.locationServicesEnabled() else {

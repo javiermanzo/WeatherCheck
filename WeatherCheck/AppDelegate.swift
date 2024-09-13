@@ -34,11 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("\(Date()) perfom bg fetch")
-        completionHandler(.newData)
-    }
-
     func registerBackgroundFetch() {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: NotificationsManager.taskIdentifier, using: nil) { task in
             if let task = task as? BGAppRefreshTask {

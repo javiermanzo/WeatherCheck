@@ -112,7 +112,7 @@ extension CitiesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 && viewModel.currentCity != nil {
             return "Current City"
-        } else if section == 1 {
+        } else if section == 1 && !viewModel.sortedCities.isEmpty {
             return "Cities"
         }
         return nil

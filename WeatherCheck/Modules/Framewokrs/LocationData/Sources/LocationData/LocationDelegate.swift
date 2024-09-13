@@ -29,6 +29,8 @@ class LocationDelegate: NSObject, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        onUpdateStatus?(status)
+        if status != .notDetermined {
+            onUpdateStatus?(status)
+        }
     }
 }
