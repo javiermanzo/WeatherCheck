@@ -2,11 +2,55 @@ import XCTest
 @testable import Storage
 
 final class StorageTests: XCTestCase {
-    func testExample() throws {
-        // XCTest Documentation
-        // https://developer.apple.com/documentation/xctest
+    var storage: Storage!
 
-        // Defining Test Cases and Test Methods
-        // https://developer.apple.com/documentation/xctest/defining_test_cases_and_test_methods
+    override func setUp() {
+        super.setUp()
+        storage = Storage(identifier: "com.yourapp.test")
+        storage.clear()
+    }
+
+    override func tearDown() {
+        storage.clear()
+        super.tearDown()
+    }
+
+    func testAddAndRetrieveValue() {
+        let testValue = "TestString"
+        storage.add(value: testValue, forKey: "testKey")
+
+        let retrievedValue: String? = storage.value(forKey: "testKey", type: String.self)
+        XCTAssertEqual(retrievedValue, testValue)
+    }
+
+    func testRemoveValue() {
+        let testValue = "TestString"
+        storage.add(value: testValue, forKey: "testKey")
+        storage.removeValue(forKey: "testKey")
+
+        let retrievedValue: String? = storage.value(forKey: "testKey", type: String.self)
+        XCTAssertNil(retrievedValue)
+    }
+
+    func testClearStorage() {
+        let testValue = "TestString"
+        storage.add(value: testValue, forKey: "testKey")
+        storage.clear()
+
+        let retrievedValue: String? = storage.value(forKey: "testKey", type: String.self)
+        XCTAssertNil(retrievedValue)
+    }
+
+    func testAddAndRetrieveCustomObject() {
+        struct TestModel: Codable, Equatable {
+            let name: String
+            let age: Int
+        }
+
+        let testObject = TestModel(name: "Javier", age: 30)
+        storage.add(value: testObject, forKey: "testModelKey")
+
+        let retrievedObject: TestModel? = storage.value(forKey: "testModelKey", type: TestModel.self)
+        XCTAssertEqual(retrievedObject, testObject)
     }
 }
