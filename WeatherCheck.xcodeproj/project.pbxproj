@@ -18,6 +18,8 @@
 		3B49ED582C937DE400EB4698 /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED572C937DE400EB4698 /* CityTableViewCell.swift */; };
 		3B49ED5F2C9390A700EB4698 /* AddCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED5E2C9390A700EB4698 /* AddCityViewModel.swift */; };
 		3B49ED612C9390CF00EB4698 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED602C9390CF00EB4698 /* AddCityViewController.swift */; };
+		3B49ED642C93B92000EB4698 /* Double-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED632C93B92000EB4698 /* Double-extension.swift */; };
+		3B49ED692C93BE6C00EB4698 /* RemoteImage in Frameworks */ = {isa = PBXBuildFile; productRef = 3B49ED682C93BE6C00EB4698 /* RemoteImage */; };
 		3B7BE1672C91C2B500718845 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE1662C91C2B500718845 /* AppDelegate.swift */; };
 		3B7BE1692C91C2B500718845 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE1682C91C2B500718845 /* SceneDelegate.swift */; };
 		3B7BE16B2C91C2B500718845 /* CitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE16A2C91C2B500718845 /* CitiesViewController.swift */; };
@@ -58,6 +60,8 @@
 		3B49ED572C937DE400EB4698 /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
 		3B49ED5E2C9390A700EB4698 /* AddCityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewModel.swift; sourceTree = "<group>"; };
 		3B49ED602C9390CF00EB4698 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
+		3B49ED632C93B92000EB4698 /* Double-extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double-extension.swift"; sourceTree = "<group>"; };
+		3B49ED672C93BDF900EB4698 /* RemoteImage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RemoteImage; sourceTree = "<group>"; };
 		3B7BE1632C91C2B500718845 /* WeatherCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B7BE1662C91C2B500718845 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B7BE1682C91C2B500718845 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +83,7 @@
 			files = (
 				3B49ED3B2C91D75F00EB4698 /* WeatherData in Frameworks */,
 				3B49ED452C9303CC00EB4698 /* LocationData in Frameworks */,
+				3B49ED692C93BE6C00EB4698 /* RemoteImage in Frameworks */,
 				3B49ED472C9303CD00EB4698 /* Reminder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +116,7 @@
 		3B49ED352C91D6F100EB4698 /* Framewokrs */ = {
 			isa = PBXGroup;
 			children = (
+				3B49ED672C93BDF900EB4698 /* RemoteImage */,
 				3B49ED432C92582800EB4698 /* Reminder */,
 				3B49ED3D2C91E03300EB4698 /* LocationData */,
 				3B49ED362C91D70B00EB4698 /* WeatherData */,
@@ -128,6 +134,7 @@
 		3B49ED482C930F3000EB4698 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3B49ED622C93B91300EB4698 /* Extensions */,
 				3B49ED492C930F3D00EB4698 /* NotificationsManager.swift */,
 			);
 			path = Utils;
@@ -183,6 +190,14 @@
 				3B49ED5E2C9390A700EB4698 /* AddCityViewModel.swift */,
 			);
 			path = AddCity;
+			sourceTree = "<group>";
+		};
+		3B49ED622C93B91300EB4698 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3B49ED632C93B92000EB4698 /* Double-extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		3B7BE15A2C91C2B500718845 = {
@@ -262,6 +277,7 @@
 				3B49ED3A2C91D75F00EB4698 /* WeatherData */,
 				3B49ED442C9303CC00EB4698 /* LocationData */,
 				3B49ED462C9303CD00EB4698 /* Reminder */,
+				3B49ED682C93BE6C00EB4698 /* RemoteImage */,
 			);
 			productName = WeatherCheck;
 			productReference = 3B7BE1632C91C2B500718845 /* WeatherCheck.app */;
@@ -383,6 +399,7 @@
 				3B49ED552C937A7300EB4698 /* WeatherRepository.swift in Sources */,
 				3B49ED5F2C9390A700EB4698 /* AddCityViewModel.swift in Sources */,
 				3B49ED4E2C93798100EB4698 /* CityModel.swift in Sources */,
+				3B49ED642C93B92000EB4698 /* Double-extension.swift in Sources */,
 				3B49ED522C937A4700EB4698 /* CitiesViewModel.swift in Sources */,
 				3B49ED612C9390CF00EB4698 /* AddCityViewController.swift in Sources */,
 				3B7BE1672C91C2B500718845 /* AppDelegate.swift in Sources */,
@@ -741,6 +758,10 @@
 		3B49ED462C9303CD00EB4698 /* Reminder */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Reminder;
+		};
+		3B49ED682C93BE6C00EB4698 /* RemoteImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RemoteImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

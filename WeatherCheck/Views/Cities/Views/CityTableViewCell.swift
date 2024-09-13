@@ -5,6 +5,7 @@
 //  Created by Javier Manzo on 12/09/2024.
 //
 import UIKit
+import RemoteImage
 
 class CityTableViewCell: UITableViewCell {
 
@@ -55,9 +56,18 @@ class CityTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with city: CityModel, temperature: String, image: UIImage?) {
+    func configure(with city: CityModel) {
         cityNameLabel.text = city.name
-        temperatureLabel.text = temperature
-        cityImageView.image = image
+        temperatureLabel.text = city.weather?.current.temperature.degreesCelsius ?? "--"
+
+        if let urlString = city.weather?.current.details.first?.iconUrl,
+           let url = URL(string: urlString) {
+            Task {
+                await cityImageView.setImage(from: url)
+            }
+        } else {
+            cityImageView.image = nil
+        }
+
     }
 }

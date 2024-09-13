@@ -6,14 +6,16 @@
 //
 
 import Foundation
+import WeatherData
 
 struct CityModel: Codable, Identifiable, Hashable {
     let id: String
     let name: String
-    let latitud: Double
-    let longitud: Double
+    let latitude: Double
+    let longitude: Double
     let createdAt: Double
-    
+    var weather: WeatherResponseModel?
+
     static func == (lhs: CityModel, rhs: CityModel) -> Bool {
         return lhs.id == rhs.id
     }

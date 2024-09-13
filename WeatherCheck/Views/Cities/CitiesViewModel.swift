@@ -24,7 +24,16 @@ final class CitiesViewModel {
 
     init(repository: WeatherRepositoryProtocol = WeatherRepository()) {
         self.repository = repository
+    }
+
+    func getSavedCities() {
         cities = Set(repository.getCities())
+
+        delegate?.reloadTableView()
+
+        for city in cities {
+            requestWeather(city: city)
+        }
     }
 
     func getCurrentCity() {
@@ -38,7 +47,11 @@ final class CitiesViewModel {
 
                     if let cityName = location.name {
                         await MainActor.run {
-                            currentCity = CityModel(id: location.id, name: cityName, latitud: location.latitude, longitud: location.longitude, createdAt: Date().timeIntervalSince1970)
+                            let city = CityModel(id: location.id, name: cityName, latitude: location.latitude, longitude: location.longitude, createdAt: Date().timeIntervalSince1970)
+                            
+                            requestWeather(city: city)
+                            
+                            currentCity = city
                             delegate?.reloadTableView()
                         }
                     }
@@ -50,6 +63,26 @@ final class CitiesViewModel {
             }
         }
     }
+
+    func requestWeather(city: CityModel) {
+        Task {
+            let response = await repository.requestWeather(latitude: city.latitude, longitude: city.longitude, details: false)
+
+            switch response {
+            case .success(let weather):
+                let updatedCity = CityModel(id: city.id, name: city.name, latitude: city.latitude, longitude: city.longitude, createdAt: city.createdAt, weather: weather)
+                cities.insert(updatedCity)
+
+                await MainActor.run {
+                    delegate?.reloadTableView
+                }
+            case .cancelled:
+                break
+            case  .error(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 // MARK: - CitiesViewModelDelegate
@@ -57,5 +90,7 @@ extension CitiesViewModel: AddCityDelegate {
     func didAddCity(_ city: CityModel) {
         cities.insert(city)
         delegate?.reloadTableView()
+        
+        requestWeather(city: city)
     }
 }

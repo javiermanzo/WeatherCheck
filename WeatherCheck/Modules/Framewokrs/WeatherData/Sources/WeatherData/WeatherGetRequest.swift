@@ -8,7 +8,9 @@
 import Foundation
 import Harbor
 
-struct WeatherGetRequest: HGetRequestProtocol {
+struct WeatherGetRequest: HGetRequestProtocol, HDebugRequestProtocol {
+    var debugType: HDebugRequestType = .requestAndResponse
+
     typealias Model = WeatherResponseModel
     let url: String = "\(WeatherData.baseUrl)/data/2.5/onecall"
     var headerParameters: [String: String]?
@@ -18,10 +20,10 @@ struct WeatherGetRequest: HGetRequestProtocol {
     var retries: Int? = nil
     let timeout: TimeInterval = 15
 
-    init(latitud: Double, longitud: Double, details: Bool = false) {
+    init(latitude: Double, longitude: Double, details: Bool = false) {
         queryParameters = [
-            "lat": "\(latitud)",
-            "lon": "\(longitud)",
+            "lat": "\(latitude)",
+            "lon": "\(longitude)",
             "units": "metric",
         ]
 

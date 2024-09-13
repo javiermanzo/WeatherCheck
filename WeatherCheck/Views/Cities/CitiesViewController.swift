@@ -10,8 +10,10 @@ import LocationData
 
 class CitiesViewController: UIViewController {
 
-    let tableView = UITableView()
-    let viewModel = CitiesViewModel()
+    private let viewModel = CitiesViewModel()
+
+    private let tableView = UITableView()
+    private let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,7 @@ class CitiesViewController: UIViewController {
 
     func setupViews() {
         setupTableView()
+        setupPullToRefresh()
         setupNavigationBar()
     }
 
@@ -40,6 +43,7 @@ class CitiesViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(CityTableViewCell.self, forCellReuseIdentifier: CityTableViewCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.refreshControl = refreshControl
         view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
@@ -49,6 +53,10 @@ class CitiesViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+
+    func setupPullToRefresh() {
+            refreshControl.addTarget(self, action: #selector(loadCitiesData), for: .valueChanged)
+        }
 
     func setupNavigationBar() {
         title = "Weather Check"
@@ -60,8 +68,10 @@ class CitiesViewController: UIViewController {
         self.present(UINavigationController(rootViewController: addCityVC), animated: true)
     }
 
-    func loadCitiesData() {
+    @objc func loadCitiesData() {
         viewModel.getCurrentCity()
+        viewModel.getSavedCities()
+        refreshControl.endRefreshing()
     }
 }
 
@@ -88,10 +98,10 @@ extension CitiesViewController: UITableViewDataSource {
         }
 
         if indexPath.section == 0, let currentCity = viewModel.currentCity {
-            cell.configure(with: currentCity, temperature: "22°C", image: UIImage(systemName: "sun.max"))
+            cell.configure(with: currentCity)
         } else {
             let city = viewModel.sortedCities[indexPath.row]
-            cell.configure(with: city, temperature: "25°C", image: UIImage(systemName: "sun.max"))
+            cell.configure(with: city)
         }
 
         return cell

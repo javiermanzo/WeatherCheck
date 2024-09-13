@@ -8,5 +8,5 @@
 import Foundation
 
 enum Environment {
-    static let apiKey:  String = "e286a159a583b9251688d27bebc25783"
+    static let apiKey:  String = ""
 }

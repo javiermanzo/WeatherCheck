@@ -63,7 +63,7 @@ final class AddCityViewModel {
     func addCity() -> Bool {
         if let lastLocation,
            let cityName = lastLocation.name {
-            let city = CityModel(id: lastLocation.id, name: cityName, latitud: lastLocation.latitude, longitud: lastLocation.longitude, createdAt: Date().timeIntervalSince1970)
+            let city = CityModel(id: lastLocation.id, name: cityName, latitude: lastLocation.latitude, longitude: lastLocation.longitude, createdAt: Date().timeIntervalSince1970)
             delegate?.didAddCity(city)
             return true
         }

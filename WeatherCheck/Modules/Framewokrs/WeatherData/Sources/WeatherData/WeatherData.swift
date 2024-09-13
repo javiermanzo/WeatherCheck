@@ -11,13 +11,13 @@ import Harbor
 public final class WeatherData {
 
     internal static let baseUrl = "https://api.openweathermap.org"
-    internal static var apiKey = ""
+    internal static var apiKey = "e286a159a583b9251688d27bebc25783"
 
     public static func setUpApiKey(_ apiKey: String) {
         Self.apiKey = apiKey
     }
 
-    public static func requestWeather(latitud: Double, longitud: Double, details: Bool = false) async -> HResponseWithResult<WeatherResponseModel> {
-        return await WeatherGetRequest(latitud: latitud, longitud: longitud, details: details).request()
+    public static func requestWeather(latitude: Double, longitude: Double, details: Bool = false) async -> HResponseWithResult<WeatherResponseModel> {
+        return await WeatherGetRequest(latitude: latitude, longitude: longitude, details: details).request()
     }
 }
