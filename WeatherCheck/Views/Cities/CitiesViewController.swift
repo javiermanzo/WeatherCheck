@@ -16,6 +16,8 @@ class CitiesViewController: UIViewController {
     private let tableView = UITableView()
     private let refreshControl = UIRefreshControl()
 
+    private var emptyStateView: EmptyStateView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,9 +37,33 @@ class CitiesViewController: UIViewController {
     }
 
     func setupViews() {
+        view.backgroundColor = .systemBackground
         setupTableView()
+        setupEmptyState()
         setupPullToRefresh()
         setupNavigationBar()
+        updateEmptyState()
+    }
+
+    func setupEmptyState() {
+        emptyStateView = EmptyStateView(
+            title: "You have to add a city",
+            buttonTitle: "Add",
+            target: self,
+            action: #selector(addCity)
+        )
+        guard let emptyStateView = emptyStateView else { return }
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(emptyStateView)
+
+        NSLayoutConstraint.activate([
+            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
+            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+
+        emptyStateView.isHidden = true // Initially hide the empty state view
     }
 
     func setupTableView() {
@@ -75,6 +101,16 @@ class CitiesViewController: UIViewController {
     @objc func updateCitiesWeather() {
         viewModel.updateCitiesWeather()
         refreshControl.endRefreshing()
+    }
+
+    func updateEmptyState() {
+        if viewModel.currentCity == nil && viewModel.sortedCities.isEmpty {
+            tableView.isHidden = true
+            emptyStateView?.isHidden = false
+        } else {
+            tableView.isHidden = false
+            emptyStateView?.isHidden = true
+        }
     }
 }
 
@@ -139,6 +175,6 @@ extension CitiesViewController: UITableViewDelegate {
 extension CitiesViewController: CitiesViewModelDelegate {
     func reloadTableView() {
         tableView.reloadData()
+        updateEmptyState()
     }
 }
-

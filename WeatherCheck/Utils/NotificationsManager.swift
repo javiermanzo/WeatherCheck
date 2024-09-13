@@ -34,7 +34,7 @@ class NotificationsManager {
     func scheduleAppRefresh() async {
         if await checkNotificationPermission() {
             let request = BGAppRefreshTaskRequest(identifier: Self.taskIdentifier)
-            request.earliestBeginDate = Date(timeIntervalSinceNow: 3600) // Each hour
+            request.earliestBeginDate = Date(timeIntervalSinceNow: 21600) // Every 6 hours
 
             do {
                 try BGTaskScheduler.shared.submit(request)

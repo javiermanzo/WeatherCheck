@@ -29,6 +29,7 @@
 		3B49ED742C94760A00EB4698 /* DailyWeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED732C94760A00EB4698 /* DailyWeatherTableViewCell.swift */; };
 		3B49ED772C94765C00EB4698 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED762C94765C00EB4698 /* WeatherViewModel.swift */; };
 		3B49ED792C94791100EB4698 /* UINavigationController-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED782C94791100EB4698 /* UINavigationController-extension.swift */; };
+		3B79B74B2C94CB8900F11E53 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B79B74A2C94CB8900F11E53 /* EmptyStateView.swift */; };
 		3B7BE1672C91C2B500718845 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE1662C91C2B500718845 /* AppDelegate.swift */; };
 		3B7BE1692C91C2B500718845 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE1682C91C2B500718845 /* SceneDelegate.swift */; };
 		3B7BE16B2C91C2B500718845 /* CitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE16A2C91C2B500718845 /* CitiesViewController.swift */; };
@@ -80,6 +81,7 @@
 		3B49ED732C94760A00EB4698 /* DailyWeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherTableViewCell.swift; sourceTree = "<group>"; };
 		3B49ED762C94765C00EB4698 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		3B49ED782C94791100EB4698 /* UINavigationController-extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController-extension.swift"; sourceTree = "<group>"; };
+		3B79B74A2C94CB8900F11E53 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		3B7BE1632C91C2B500718845 /* WeatherCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B7BE1662C91C2B500718845 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B7BE1682C91C2B500718845 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				3B49ED572C937DE400EB4698 /* CityTableViewCell.swift */,
+				3B79B74A2C94CB8900F11E53 /* EmptyStateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				3B49ED742C94760A00EB4698 /* DailyWeatherTableViewCell.swift in Sources */,
 				3B49ED582C937DE400EB4698 /* CityTableViewCell.swift in Sources */,
 				3B49ED6E2C94746F00EB4698 /* MockRepository.swift in Sources */,
+				3B79B74B2C94CB8900F11E53 /* EmptyStateView.swift in Sources */,
 				3B49ED702C94754500EB4698 /* WeatherRepositoryProtocol.swift in Sources */,
 				3B7BE16B2C91C2B500718845 /* CitiesViewController.swift in Sources */,
 				3B49ED382C91D73E00EB4698 /* Environment.swift in Sources */,

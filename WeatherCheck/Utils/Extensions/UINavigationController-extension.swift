@@ -9,6 +9,7 @@ import UIKit
 
 extension UINavigationController {
     func setStyle() {
+        self.view.backgroundColor = .systemBackground
         self.navigationBar.isTranslucent = false
         self.navigationBar.backgroundColor = .systemBackground
         self.navigationBar.barTintColor = .systemBackground
