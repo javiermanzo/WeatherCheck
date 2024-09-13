@@ -45,10 +45,6 @@ class AddCityViewController: UIViewController {
 
     private func setupNavigationBar() {
         title = "Add a City"
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.backgroundColor = .systemBackground
-        navigationController?.navigationBar.barTintColor = .systemBackground
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
 
         let locationButton = UIBarButtonItem(image: UIImage(systemName: "location.fill"),
                                              style: .plain,

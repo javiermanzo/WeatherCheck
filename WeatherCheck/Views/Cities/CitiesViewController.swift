@@ -7,6 +7,7 @@
 
 import UIKit
 import LocationData
+import WeatherData
 
 class CitiesViewController: UIViewController {
 
@@ -25,7 +26,7 @@ class CitiesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        loadCitiesData()
+        updateCitiesWeather()
     }
 
     func setupViewModel() {
@@ -55,8 +56,8 @@ class CitiesViewController: UIViewController {
     }
 
     func setupPullToRefresh() {
-            refreshControl.addTarget(self, action: #selector(loadCitiesData), for: .valueChanged)
-        }
+        refreshControl.addTarget(self, action: #selector(updateCitiesWeather), for: .valueChanged)
+    }
 
     func setupNavigationBar() {
         title = "Weather Check"
@@ -65,12 +66,13 @@ class CitiesViewController: UIViewController {
 
     @objc func addCity() {
         let addCityVC = AddCityViewController(delegate: viewModel)
-        self.present(UINavigationController(rootViewController: addCityVC), animated: true)
+        let navigationController = UINavigationController(rootViewController: addCityVC)
+        navigationController.setStyle()
+        self.present(navigationController, animated: true)
     }
 
-    @objc func loadCitiesData() {
-        viewModel.getCurrentCity()
-        viewModel.getSavedCities()
+    @objc func updateCitiesWeather() {
+        viewModel.updateCitiesWeather()
         refreshControl.endRefreshing()
     }
 }
@@ -78,7 +80,7 @@ class CitiesViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension CitiesViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return viewModel.currentCity != nil ? 2 : 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -121,14 +123,16 @@ extension CitiesViewController: UITableViewDataSource {
 extension CitiesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        let city: CityModel
         if indexPath.section == 0, let currentCity = viewModel.currentCity {
-            print("Selected current city: \(currentCity.name)")
-
+            city = currentCity
         } else {
-            let city = viewModel.sortedCities[indexPath.row]
-            print("Selected city: \(city.name)")
-
+            city = viewModel.sortedCities[indexPath.row]
         }
+
+        let vc = WeatherViewController(city: city)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

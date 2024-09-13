@@ -11,6 +11,12 @@ public struct WeatherResponseModel: Codable {
     public var current: WeatherModel
     public var hourly: [WeatherModel]?
     public var daily: [WeatherDailyModel]?
+
+    public init(current: WeatherModel, hourly: [WeatherModel]? = nil, daily: [WeatherDailyModel]? = nil) {
+        self.current = current
+        self.hourly = hourly
+        self.daily = daily
+    }
 }
 
 public struct WeatherModel: Codable, Identifiable {
@@ -38,6 +44,19 @@ public struct WeatherModel: Codable, Identifiable {
         case windDeg = "wind_deg"
         case details = "weather"
     }
+
+    public init(date: Int, temperature: Double, feelsLike: Double, pressure: Int, humidity: Int, dewPoint: Double, clouds: Int, windSpeed: Double, windDeg: Int, details: [WeatherDetailsModel]) {
+        self.date = date
+        self.temperature = temperature
+        self.feelsLike = feelsLike
+        self.pressure = pressure
+        self.humidity = humidity
+        self.dewPoint = dewPoint
+        self.clouds = clouds
+        self.windSpeed = windSpeed
+        self.windDeg = windDeg
+        self.details = details
+    }
 }
 
 public struct WeatherDailyModel: Codable, Identifiable {
@@ -51,11 +70,22 @@ public struct WeatherDailyModel: Codable, Identifiable {
         case temperature = "temp"
         case details = "weather"
     }
+
+    public init(date: Int, temperature: TemperatureModel, details: [WeatherDetailsModel]) {
+        self.date = date
+        self.temperature = temperature
+        self.details = details
+    }
 }
 
 public struct TemperatureModel: Codable {
     public let min: Double
     public let max: Double
+
+    public init(min: Double, max: Double) {
+        self.min = min
+        self.max = max
+    }
 }
 
 public struct WeatherDetailsModel: Codable, Identifiable {
@@ -66,6 +96,13 @@ public struct WeatherDetailsModel: Codable, Identifiable {
 
     public var iconUrl: String {
         "https://openweathermap.org/img/wn/\(icon)@2x.png"
+    }
+
+    public init(id: Int, main: String, description: String, icon: String) {
+        self.id = id
+        self.main = main
+        self.description = description
+        self.icon = icon
     }
 }
 

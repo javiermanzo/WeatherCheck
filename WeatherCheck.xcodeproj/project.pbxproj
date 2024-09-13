@@ -20,6 +20,13 @@
 		3B49ED612C9390CF00EB4698 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED602C9390CF00EB4698 /* AddCityViewController.swift */; };
 		3B49ED642C93B92000EB4698 /* Double-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED632C93B92000EB4698 /* Double-extension.swift */; };
 		3B49ED692C93BE6C00EB4698 /* RemoteImage in Frameworks */ = {isa = PBXBuildFile; productRef = 3B49ED682C93BE6C00EB4698 /* RemoteImage */; };
+		3B49ED6C2C93D19700EB4698 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED6B2C93D19700EB4698 /* WeatherViewController.swift */; };
+		3B49ED6E2C94746F00EB4698 /* MockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED6D2C94746F00EB4698 /* MockRepository.swift */; };
+		3B49ED702C94754500EB4698 /* WeatherRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED6F2C94754500EB4698 /* WeatherRepositoryProtocol.swift */; };
+		3B49ED722C9475E200EB4698 /* CurrentWeatherHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED712C9475E200EB4698 /* CurrentWeatherHeaderView.swift */; };
+		3B49ED742C94760A00EB4698 /* DailyWeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED732C94760A00EB4698 /* DailyWeatherTableViewCell.swift */; };
+		3B49ED772C94765C00EB4698 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED762C94765C00EB4698 /* WeatherViewModel.swift */; };
+		3B49ED792C94791100EB4698 /* UINavigationController-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49ED782C94791100EB4698 /* UINavigationController-extension.swift */; };
 		3B7BE1672C91C2B500718845 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE1662C91C2B500718845 /* AppDelegate.swift */; };
 		3B7BE1692C91C2B500718845 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE1682C91C2B500718845 /* SceneDelegate.swift */; };
 		3B7BE16B2C91C2B500718845 /* CitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE16A2C91C2B500718845 /* CitiesViewController.swift */; };
@@ -62,6 +69,13 @@
 		3B49ED602C9390CF00EB4698 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
 		3B49ED632C93B92000EB4698 /* Double-extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double-extension.swift"; sourceTree = "<group>"; };
 		3B49ED672C93BDF900EB4698 /* RemoteImage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RemoteImage; sourceTree = "<group>"; };
+		3B49ED6B2C93D19700EB4698 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		3B49ED6D2C94746F00EB4698 /* MockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRepository.swift; sourceTree = "<group>"; };
+		3B49ED6F2C94754500EB4698 /* WeatherRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRepositoryProtocol.swift; sourceTree = "<group>"; };
+		3B49ED712C9475E200EB4698 /* CurrentWeatherHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherHeaderView.swift; sourceTree = "<group>"; };
+		3B49ED732C94760A00EB4698 /* DailyWeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherTableViewCell.swift; sourceTree = "<group>"; };
+		3B49ED762C94765C00EB4698 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		3B49ED782C94791100EB4698 /* UINavigationController-extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController-extension.swift"; sourceTree = "<group>"; };
 		3B7BE1632C91C2B500718845 /* WeatherCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B7BE1662C91C2B500718845 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B7BE1682C91C2B500718845 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +165,7 @@
 		3B49ED4F2C937A2C00EB4698 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3B49ED6A2C93D17500EB4698 /* Weather */,
 				3B49ED5B2C93906B00EB4698 /* AddCity */,
 				3B49ED502C937A3400EB4698 /* Cities */,
 			);
@@ -170,7 +185,9 @@
 		3B49ED532C937A5C00EB4698 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				3B49ED6F2C94754500EB4698 /* WeatherRepositoryProtocol.swift */,
 				3B49ED542C937A7300EB4698 /* WeatherRepository.swift */,
+				3B49ED6D2C94746F00EB4698 /* MockRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -196,8 +213,28 @@
 			isa = PBXGroup;
 			children = (
 				3B49ED632C93B92000EB4698 /* Double-extension.swift */,
+				3B49ED782C94791100EB4698 /* UINavigationController-extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3B49ED6A2C93D17500EB4698 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				3B49ED752C94764C00EB4698 /* Views */,
+				3B49ED6B2C93D19700EB4698 /* WeatherViewController.swift */,
+				3B49ED762C94765C00EB4698 /* WeatherViewModel.swift */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		3B49ED752C94764C00EB4698 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3B49ED712C9475E200EB4698 /* CurrentWeatherHeaderView.swift */,
+				3B49ED732C94760A00EB4698 /* DailyWeatherTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		3B7BE15A2C91C2B500718845 = {
@@ -393,10 +430,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B49ED722C9475E200EB4698 /* CurrentWeatherHeaderView.swift in Sources */,
+				3B49ED772C94765C00EB4698 /* WeatherViewModel.swift in Sources */,
+				3B49ED792C94791100EB4698 /* UINavigationController-extension.swift in Sources */,
+				3B49ED742C94760A00EB4698 /* DailyWeatherTableViewCell.swift in Sources */,
 				3B49ED582C937DE400EB4698 /* CityTableViewCell.swift in Sources */,
+				3B49ED6E2C94746F00EB4698 /* MockRepository.swift in Sources */,
+				3B49ED702C94754500EB4698 /* WeatherRepositoryProtocol.swift in Sources */,
 				3B7BE16B2C91C2B500718845 /* CitiesViewController.swift in Sources */,
 				3B49ED382C91D73E00EB4698 /* Environment.swift in Sources */,
 				3B49ED552C937A7300EB4698 /* WeatherRepository.swift in Sources */,
+				3B49ED6C2C93D19700EB4698 /* WeatherViewController.swift in Sources */,
 				3B49ED5F2C9390A700EB4698 /* AddCityViewModel.swift in Sources */,
 				3B49ED4E2C93798100EB4698 /* CityModel.swift in Sources */,
 				3B49ED642C93B92000EB4698 /* Double-extension.swift in Sources */,

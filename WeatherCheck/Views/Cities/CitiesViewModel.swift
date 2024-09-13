@@ -7,6 +7,7 @@
 
 import Foundation
 import LocationData
+import WeatherData
 
 protocol CitiesViewModelDelegate: AnyObject {
     func reloadTableView()
@@ -22,21 +23,32 @@ final class CitiesViewModel {
         Array(cities).sorted(by: { $0.createdAt < $1.createdAt })
     }
 
-    init(repository: WeatherRepositoryProtocol = WeatherRepository()) {
+    init(repository: WeatherRepositoryProtocol = MockRepository()) {
         self.repository = repository
+
+        getCurrentCity()
+        fetchSavedCities()
     }
 
-    func getSavedCities() {
-        cities = Set(repository.getCities())
+    func updateCitiesWeather() {
+        requestWeatherAndUpdateCurrentCity()
+
+        for city in cities {
+            requestWeatherAndUpdateCity(city)
+        }
+    }
+
+    private func fetchSavedCities() {
+        cities = Set(repository.fetchSavedCities())
 
         delegate?.reloadTableView()
 
         for city in cities {
-            requestWeather(city: city)
+            requestWeatherAndUpdateCity(city)
         }
     }
 
-    func getCurrentCity() {
+    private func getCurrentCity() {
         Task { @MainActor in
             let status = await LocationData.shared.checkLocationAuthorizationStatus()
 
@@ -46,14 +58,14 @@ final class CitiesViewModel {
                     let location = try await LocationData.shared.requestCurrentLocation()
 
                     if let cityName = location.name {
+                        let city = CityModel(id: location.id, name: cityName, latitude: location.latitude, longitude: location.longitude, createdAt: Date().timeIntervalSince1970)
+
                         await MainActor.run {
-                            let city = CityModel(id: location.id, name: cityName, latitude: location.latitude, longitude: location.longitude, createdAt: Date().timeIntervalSince1970)
-                            
-                            requestWeather(city: city)
-                            
                             currentCity = city
                             delegate?.reloadTableView()
                         }
+
+                        requestWeatherAndUpdateCurrentCity()
                     }
                 } catch {
                     print(error)
@@ -64,24 +76,49 @@ final class CitiesViewModel {
         }
     }
 
-    func requestWeather(city: CityModel) {
+    func requestWeatherAndUpdateCurrentCity() {
         Task {
-            let response = await repository.requestWeather(latitude: city.latitude, longitude: city.longitude, details: false)
-
-            switch response {
-            case .success(let weather):
-                let updatedCity = CityModel(id: city.id, name: city.name, latitude: city.latitude, longitude: city.longitude, createdAt: city.createdAt, weather: weather)
-                cities.insert(updatedCity)
-
+            if let currentCity = self.currentCity,
+               let weather = await requestWeather(city: currentCity) {
+                let updatedCurrentCity = updateCity(currentCity, weather: weather)
+                self.currentCity = updatedCurrentCity
                 await MainActor.run {
-                    delegate?.reloadTableView
+                    delegate?.reloadTableView()
                 }
-            case .cancelled:
-                break
-            case  .error(let error):
-                print(error)
             }
         }
+    }
+
+    func requestWeatherAndUpdateCity(_ city: CityModel) {
+        Task {
+            if let weather = await requestWeather(city: city) {
+                let updatedCity = updateCity(city, weather: weather)
+                await MainActor.run {
+                    cities.remove(city)
+                    cities.insert(updatedCity)
+                    delegate?.reloadTableView()
+                }
+            }
+        }
+    }
+
+    private func requestWeather(city: CityModel) async -> WeatherResponseModel? {
+        let response = await repository.requestWeather(latitude: city.latitude, longitude: city.longitude, details: false)
+
+        switch response {
+        case .success(let weather):
+            return weather
+        case .cancelled:
+            return nil
+        case  .error(let error):
+            print(error)
+            return nil
+        }
+    }
+
+    private func updateCity(_ city: CityModel, weather: WeatherResponseModel) -> CityModel {
+        let updatedCity = CityModel(id: city.id, name: city.name, latitude: city.latitude, longitude: city.longitude, createdAt: city.createdAt, weather: weather)
+        return updatedCity
     }
 }
 
@@ -90,7 +127,7 @@ extension CitiesViewModel: AddCityDelegate {
     func didAddCity(_ city: CityModel) {
         cities.insert(city)
         delegate?.reloadTableView()
-        
-        requestWeather(city: city)
+
+        requestWeatherAndUpdateCity(city)
     }
 }

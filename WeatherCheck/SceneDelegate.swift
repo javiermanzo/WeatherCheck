@@ -15,6 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             let vc = CitiesViewController()
             let navigationController = UINavigationController(rootViewController: vc)
+            navigationController.setStyle()
             window.rootViewController = navigationController
             self.window = window
             window.makeKeyAndVisible()
