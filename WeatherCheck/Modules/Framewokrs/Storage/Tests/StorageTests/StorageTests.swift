@@ -47,7 +47,7 @@ final class StorageTests: XCTestCase {
             let age: Int
         }
 
-        let testObject = TestModel(name: "Javier", age: 30)
+        let testObject = TestModel(name: "Javier", age: 33)
         storage.add(value: testObject, forKey: "testModelKey")
 
         let retrievedObject: TestModel? = storage.value(forKey: "testModelKey", type: TestModel.self)
