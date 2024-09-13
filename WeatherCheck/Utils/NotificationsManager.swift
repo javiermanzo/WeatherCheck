@@ -65,14 +65,35 @@ class NotificationsManager {
 
     func compareWeatherValues() {
         Task {
-            if await checkNotificationPermission() {
+            guard await checkNotificationPermission() else { return }
 
-                // TODO: Handle weather check
-                if true {
+            let repository = WeatherRepository()
+            let savedCities = repository.fetchSavedCities()
+
+            for city in savedCities {
+                requestAndCheck(city: city)
+            }
+        }
+    }
+
+    private func requestAndCheck(city: CityModel) {
+        Task {
+            guard let savedWeather = city.weather else { return }
+            let repository = WeatherRepository()
+
+            let response = await repository.requestWeather(latitude: city.latitude, longitude: city.longitude)
+
+            switch response {
+            case .success(let result):
+                let difference = abs(savedWeather.current.temperature - result.current.temperature)
+
+                if difference > 5 {
                     await MainActor.run {
-                        Reminder.scheduleLocalNotification(title: "Weather Change Detected", body: "The weather has changed significantly. Check the app for more details!")
+                        Reminder.scheduleLocalNotification(title: "Weather Change Detected", body: "The weather has changed significantly in \(city.name). Check the app for more details!")
                     }
                 }
+            default:
+                break
             }
         }
     }

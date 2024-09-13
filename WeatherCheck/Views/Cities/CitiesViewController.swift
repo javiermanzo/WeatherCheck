@@ -21,11 +21,12 @@ class CitiesViewController: UIViewController {
 
         setupViewModel()
         setupViews()
+
+        viewModel.fetchData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.fetchData()
         updateCitiesWeather()
     }
 
@@ -84,14 +85,7 @@ extension CitiesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return viewModel.currentCity != nil ? 1 : 0
-        case 1:
-            return viewModel.sortedCities.count
-        default:
-            return 0
-        }
+        return viewModel.numberOfRows(section: section)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,11 +93,16 @@ extension CitiesViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        if indexPath.section == 0, let currentCity = viewModel.currentCity {
-            cell.configure(with: currentCity)
-        } else {
+        switch indexPath.section {
+        case Section.currentCity:
+            if let currentCity = viewModel.currentCity {
+                cell.configure(with: currentCity)
+            }
+        case Section.cities:
             let city = viewModel.sortedCities[indexPath.row]
             cell.configure(with: city)
+        default:
+            return UITableViewCell()
         }
 
         return cell
@@ -142,3 +141,4 @@ extension CitiesViewController: CitiesViewModelDelegate {
         tableView.reloadData()
     }
 }
+

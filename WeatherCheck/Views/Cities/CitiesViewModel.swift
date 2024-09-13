@@ -160,6 +160,17 @@ final class CitiesViewModel {
             }
         }
     }
+
+    func numberOfRows(section: Int) -> Int {
+        switch section {
+        case Section.currentCity:
+            return currentCity != nil ? 1 : 0
+        case Section.cities:
+            return sortedCities.count
+        default:
+            return 0
+        }
+    }
 }
 
 // MARK: - CitiesViewModelDelegate
@@ -175,4 +186,9 @@ extension CitiesViewModel: AddCityDelegate {
         repository.saveOrUpdateCity(city)
         requestWeatherAndUpdateCity(city)
     }
+}
+
+enum Section {
+    static let currentCity = 0
+    static let cities = 1
 }
