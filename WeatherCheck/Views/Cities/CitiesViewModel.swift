@@ -171,6 +171,14 @@ final class CitiesViewModel {
             return 0
         }
     }
+
+    func removeCity(_ city: CityModel) {
+        if let index = cities.firstIndex(where: { $0.id == city.id }) {
+            repository.deleteSavedCity(city)
+            cities.remove(at: index)
+        }
+        delegate?.reloadTableView()
+    }
 }
 
 // MARK: - CitiesViewModelDelegate

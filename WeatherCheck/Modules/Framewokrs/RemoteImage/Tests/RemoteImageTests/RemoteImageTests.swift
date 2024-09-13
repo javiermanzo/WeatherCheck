@@ -28,7 +28,6 @@ final class ImageLoaderTests: XCTestCase {
             let _ = try await ImageLoader.shared.loadImage(from: invalidURL)
             XCTFail("Expected an error for an invalid URL, but the request succeeded.")
         } catch {
-            // This is the expected behavior
             XCTAssertNotNil(error, "Expected an error to be thrown, but no error was found.")
         }
     }

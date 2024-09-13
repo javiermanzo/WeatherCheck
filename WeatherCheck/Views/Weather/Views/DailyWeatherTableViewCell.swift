@@ -48,7 +48,6 @@ class DailyWeatherTableViewCell: UITableViewCell {
 
         temperatureLabel.text = "Min: \(model.temperature.min)°C, Max: \(model.temperature.max)°C"
 
-        // Descargar la imagen desde la URL
         if let url = URL(string: model.details.first?.iconUrl ?? "") {
             downloadImage(from: url) { [weak self] image in
                 self?.weatherIcon.image = image

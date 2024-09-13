@@ -63,7 +63,7 @@ class CitiesViewController: UIViewController {
             emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
-        emptyStateView.isHidden = true // Initially hide the empty state view
+        emptyStateView.isHidden = true
     }
 
     func setupTableView() {
@@ -151,6 +151,25 @@ extension CitiesViewController: UITableViewDataSource {
             return "Cities"
         }
         return nil
+    }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == Section.cities
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if indexPath.section == Section.cities {
+                tableView.beginUpdates()
+                let city = viewModel.sortedCities[indexPath.row]
+
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+
+                viewModel.removeCity(city)
+
+                tableView.endUpdates()
+            }
+        }
     }
 }
 
